@@ -38,7 +38,7 @@ RUN  apk add --no-cache libressl wget
 RUN  apk add --no-cache su-exec 
 RUN  apk add --no-cache bash 
 RUN  gpg --keyserver ha.pool.sks-keyservers.net --recv-keys F1182E81C792928921DBCAB4CFCA4A29D26468DE 
-RUN  mkdir /opt 
+#RUN  mkdir /opt 
 RUN  cd /opt 
 RUN  wget -O sonarqube.zip --no-verbose https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-$SONAR_VERSION.zip 
 RUN  wget -O sonarqube.zip.asc --no-verbose https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-$SONAR_VERSION.zip.asc 
