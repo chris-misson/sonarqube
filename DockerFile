@@ -29,7 +29,8 @@ ENV SONAR_VERSION=7.1 \
 # Http port
 EXPOSE 9000
 
-RUN addgroup -S sonarqube RUN  adduser -S -G sonarqube sonarqube
+RUN addgroup -S sonarqube 
+RUN adduser -S -G sonarqube sonarqube
 
 RUN set -x
 RUN  apk add --no-cache gnupg unzip 
