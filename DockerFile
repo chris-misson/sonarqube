@@ -1,4 +1,4 @@
-FROM sonarqube:lts-alpine
+FROM sonarqube:7.1
 
 RUN apk add --no-cache curl
 
