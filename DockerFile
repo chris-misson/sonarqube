@@ -1,4 +1,4 @@
-FROM sonarqube:7.1
+FROM smeier83/sonarqube-7.1-alpine
 
 RUN apk add --no-cache curl
 
