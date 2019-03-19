@@ -38,7 +38,7 @@ RUN set -x && curl -sLo $HOME/plugins/sonar-branch-community-${SONAR_BRANCH_COMM
 
 ENV SONAR_TSQL_COMMUNITY 0.8.2
 RUN set -x && curl -sLo $HOME/plugins/sonar-tsql-plugin-${SONAR_TSQL_COMMUNITY}.jar \
-    https://github.com/gretard/sonar-tsql-plugin/releases/download/0.9.0/sonar-tsql-plugin-0.8.2.jar
+    https://github.com/gretard/sonar-tsql-plugin/releases/download/0.8.2/sonar-tsql-plugin-0.8.2.jar
 
 
 # End Plugins
