@@ -1,4 +1,4 @@
-FROM jboss/base-jdk:8
+FROM openjdk:8
 
 MAINTAINER Chris Misson
 
@@ -8,9 +8,9 @@ ENV SONAR_VERSION=7.1 \
     SONARQUBE_JDBC_PASSWORD=sonar \
     SONARQUBE_JDBC_URL=
 
-USER root
 EXPOSE 9000
-ADD root /
+
+RUN groupadd -r sonarqube && useradd -r -g sonarqube sonarqube
 
 RUN set -x \
     && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys F1182E81C792928921DBCAB4CFCA4A29D26468DE \
@@ -20,7 +20,8 @@ RUN set -x \
     && gpg --batch --verify sonarqube.zip.asc sonarqube.zip \
     && unzip sonarqube.zip \
     && mv sonarqube-$SONAR_VERSION sonarqube \
-    && rm sonarqube.zip* \
+	&& chown -R sonarqube:sonarqube sonarqube \
+    && rm sonarqube.zip \
     && rm -rf $SONARQUBE_HOME/bin/*
 
 WORKDIR $SONARQUBE_HOME
@@ -64,11 +65,7 @@ RUN set -x && curl -sLo $HOME/plugins/sonar-dependency-check-${SONAR_CHECK_DEPEN
 
 RUN cp $HOME/plugins/* $SONARQUBE_HOME/extensions/plugins
 
-RUN useradd -r sonar
-RUN /usr/bin/fix-permissions $SONARQUBE_HOME \
-    && chmod 775 $SONARQUBE_HOME/bin/run.sh
-
-USER sonar
+USER sonarqube
 ENTRYPOINT ["./bin/run.sh"]
 
 
