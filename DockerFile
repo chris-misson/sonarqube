@@ -1,31 +1,12 @@
-FROM openjdk:8
+FROM sonarqube:7.1-alpine
 
 MAINTAINER Chris Misson
 
-ENV SONAR_VERSION=7.1 \
-    SONARQUBE_HOME=/opt/sonarqube \
-    SONARQUBE_JDBC_USERNAME=sonar \
-    SONARQUBE_JDBC_PASSWORD=sonar \
-    SONARQUBE_JDBC_URL=
+RUN apk add --no-cache curl
+
+RUN mkdir -p $HOME/plugins
 
 EXPOSE 9000
-
-RUN groupadd -r sonarqube && useradd -r -g sonarqube sonarqube
-
-RUN set -x \
-    && (gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys F1182E81C792928921DBCAB4CFCA4A29D26468DE || gpg --batch --keyserver ipv4.pool.sks-keyservers.net --recv-keys F1182E81C792928921DBCAB4CFCA4A29D26468DE) \
-    && cd /opt \
-    && curl -o sonarqube.zip -fSL https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-$SONAR_VERSION.zip \
-    && curl -o sonarqube.zip.asc -fSL https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-$SONAR_VERSION.zip.asc \
-    && gpg --batch --verify sonarqube.zip.asc sonarqube.zip \
-    && unzip sonarqube.zip \
-    && mv sonarqube-$SONAR_VERSION sonarqube \
-	&& chown -R sonarqube:sonarqube sonarqube \
-    && rm sonarqube.zip \
-    && rm -rf $SONARQUBE_HOME/bin/*
-
-WORKDIR $SONARQUBE_HOME
-COPY run.sh $SONARQUBE_HOME/bin/
 
 ENV GITLAB_PLUGIN_VERSION 3.0.2
 RUN set -x && curl -sLo $HOME/plugins/sonar-gitlab-plugin-${GITLAB_PLUGIN_VERSION}.jar \
@@ -65,6 +46,7 @@ RUN set -x && curl -sLo $HOME/plugins/sonar-dependency-check-${SONAR_CHECK_DEPEN
 
 RUN cp $HOME/plugins/* $SONARQUBE_HOME/extensions/plugins
 
+WORKDIR $SONARQUBE_HOME
 USER sonarqube
 ENTRYPOINT ["./bin/run.sh"]
 
