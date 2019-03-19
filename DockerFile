@@ -40,9 +40,6 @@ ENV SONAR_TSQL_COMMUNITY 0.9.0
 RUN set -x && curl -sLo $HOME/plugins/sonar-tsqlopen-plugin-${SONAR_TSQL_COMMUNITY}.jar \
     https://github.com/gretard/sonar-tsql-plugin/releases/download/0.9.0/sonar-tsqlopen-plugin-0.9.0.jar
 
-RUN set -x && curl -sLo $HOME/plugins/rulesHelper.jar \
-    https://github.com/gretard/sonar-tsql-plugin/releases/download/0.9.0/rulesHelper.jar
-
 # End Plugins
 
 RUN cp $HOME/plugins/* $SONARQUBE_HOME/extensions/plugins
