@@ -36,9 +36,10 @@ ENV SONAR_BRANCH_COMMUNITY 2.0.0
 RUN set -x && curl -sLo $HOME/plugins/sonar-branch-community-${SONAR_BRANCH_COMMUNITY}.jar \
     https://raw.githubusercontent.com/wz2cool/java-resource/master/jar/sonar-branch-community/2.0/sonar-branch-plugin-2.0.0.jar
 
-ENV SONAR_TSQL_COMMUNITY 0.9.0
-RUN set -x && curl -sLo $HOME/plugins/sonar-tsqlopen-plugin-${SONAR_TSQL_COMMUNITY}.jar \
-    https://github.com/gretard/sonar-tsql-plugin/releases/download/0.9.0/sonar-tsqlopen-plugin-0.9.0.jar
+ENV SONAR_TSQL_COMMUNITY 0.8.2
+RUN set -x && curl -sLo $HOME/plugins/sonar-tsql-plugin-${SONAR_TSQL_COMMUNITY}.jar \
+    https://github.com/gretard/sonar-tsql-plugin/releases/download/0.9.0/sonar-tsql-plugin-0.8.2.jar
+
 
 # End Plugins
 
