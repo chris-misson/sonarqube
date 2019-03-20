@@ -31,7 +31,7 @@ RUN set -x && curl -sLo $HOME/plugins/sonar-kotlin-plugin-${KOTLIN_PLUGIN_VERSIO
 	https://github.com/arturbosch/sonar-kotlin/releases/download/${KOTLIN_PLUGIN_VERSION}/sonar-kotlin-${KOTLIN_PLUGIN_VERSION}.jar
 
 ENV SONAR_BRANCH_COMMUNITY 2.0.0
-RUN set -x && curl -sLo $HOME/#plugins/sonar-branch-community-${SONAR_BRANCH_COMMUNITY}.jar \
+RUN set -x && curl -sLo $HOME/plugins/sonar-branch-community-${SONAR_BRANCH_COMMUNITY}.jar \
     https://raw.githubusercontent.com/wz2cool/java-resource/master/jar/sonar-branch-community/2.0/sonar-branch-plugin-2.0.0.jar
 
 ENV SONAR_CHECK_DEPENDENCY 1.1.3
