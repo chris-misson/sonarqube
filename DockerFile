@@ -40,4 +40,10 @@ RUN set -x && curl -sLo $HOME/plugins/sonar-dependency-check-${SONAR_CHECK_DEPEN
 
 RUN cp $HOME/plugins/* $SONARQUBE_HOME/extensions/plugins
 
+COPY entrypoint.sh ./bin/
+
+RUN chmod +x ./bin/entrypoint.sh
+
+ENTRYPOINT ["./bin/entrypoint.sh"]
+
 
