@@ -5,6 +5,12 @@ echo Preparing SonarQube container
 mkdir -p /home/sonarqube/data
 chown -R sonarqube:sonarqube /home/sonarqube
 
+mkdir -p /home/sonarqube/data/web
+mkdir -p /home/sonarqube/data/web/deploy
+
+chown -R sonarqube:sonarqube /home/sonarqube/data/web
+chown -R sonarqube:sonarqube /home/sonarqube/data/web/deploy
+
 mv -n /opt/sonarqube/conf /home/sonarqube
 mv -n /opt/sonarqube/logs /home/sonarqube
 mv -n /opt/sonarqube/extensions /home/sonarqube
